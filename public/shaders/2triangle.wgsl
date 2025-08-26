@@ -18,15 +18,15 @@ fn vs_main(@builtin(vertex_index) VertexIndex: u32) -> VSOutput {
     );
 
     var colors = array<vec4f, 6>(
-            // Tam giác 1 màu đỏ
-        vec4f(1.0, 0.0, 0.0, 1.0),
-        vec4f(1.0, 0.0, 0.0, 1.0),
-        vec4f(1.0, 0.0, 0.0, 1.0),
+        // tam giác 1
+        vec4f(1.0, 0.0, 1.0, 1.0),
+        vec4f(1.0, 0.0, 1.0, 1.0),
+        vec4f(1.0, 0.0, 1.0, 1.0),
 
-            // Tam giác 2 màu xanh
-        vec4f(0.0, 0.0, 1.0, 1.0),
-        vec4f(0.0, 0.0, 1.0, 1.0),
-        vec4f(0.0, 0.0, 1.0, 1.0)
+        // tam giác 2
+        vec4f(1.0, 1.0, 0.0, 0.0),
+        vec4f(1.0, 0.0, 1.0, 1.0),
+        vec4f(0.0, 1.0, 1.0, 1.0)
     );
 
     var output: VSOutput;

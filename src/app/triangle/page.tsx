@@ -1,5 +1,6 @@
 'use client';
 
+import { loadShader } from "@/utils/uitls";
 import { useEffect, useRef } from "react";
 
 export default function Home() {
@@ -28,25 +29,11 @@ export default function Home() {
                 alphaMode: "premultiplied",
             });
 
-            // === Shaders (WGSL) ===
+
+            const shaderCodeTriangle = await loadShader("/shaders/triangle.wgsl");
+
             const shaderModule = device.createShaderModule({
-                code: `
-                    @vertex
-                    fn vs_main(@builtin(vertex_index) VertexIndex : u32)  -> @builtin(position) vec4f {
-                        var pos = array<vec2f, 3>(
-                            vec2f( 0.0,  0.5),   // top
-                            vec2f(-0.5, -0.5),   // bottom left
-                            vec2f( 0.5, -0.5),   // bottom right
-                        );
-
-                        return vec4f(pos[VertexIndex], 0.0, 1.0);
-                    }
-
-                    @fragment
-                    fn fs_main() -> @location(0) vec4f {
-                        return vec4f(1.0, 0.0, 0.0, 1.0); // red color
-                    }
-                    `
+                code: shaderCodeTriangle
             });
 
             // === Pipeline ===
@@ -66,7 +53,6 @@ export default function Home() {
                 },
             });
 
-            // === Render pass ===
             const commandEncoder = device.createCommandEncoder();
             const textureView = context.getCurrentTexture().createView();
 
@@ -74,7 +60,7 @@ export default function Home() {
                 colorAttachments: [
                     {
                         view: textureView,
-                        clearValue: { r: 0.647, g: 0.647, b: 0.647, a: 0.8 }, // black bg
+                        clearValue: { r: 0.647, g: 0.647, b: 0.647, a: 0.8 }, // black background color
                         loadOp: "clear",
                         storeOp: "store",
                     },

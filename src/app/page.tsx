@@ -19,8 +19,7 @@ export default function Home() {
         <div className={styles.ctas}>
           <Link
             className={styles.primary}
-            href="/gpu"
-            target="_blank"
+            href="/triangle"
             rel="noopener noreferrer"
           >
             <Image
@@ -30,7 +29,7 @@ export default function Home() {
               width={20}
               height={20}
             />
-            View demo
+            Triangle
           </Link>
         </div>
       </main>
